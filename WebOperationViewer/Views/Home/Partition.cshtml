@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebOperationViewer.ViewModels.DeviceInfoViewModel>
+
+@{
+    int rows = 1;
+    int startcount = 0;
+    ViewBag.Title = "Partition";
+}
+
+<h2>Partition</h2>
+
+<div>
+    <p>
+        @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "searchForm" }))
+        {
+            <b>Terminal ID : </b>
+            <input type="text" id="searchpartition" name="searchpartition" placeholder="" oninput="writeFunc()" />
+            <input type="submit" name="submit" onclick="submitBt()" />
+        }
+    </p>
+
+    <div>
+        <a href="@Url.Action("Partition","Home")" style="color:crimson">Refresh Page</a>
+        <a href="@Url.Action("ExportToExcelPartition","Home")">Download Excel</a>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TERM_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TERM_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USED_SPACE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FREE_SPACE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATUS)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @(startcount + rows)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TERM_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TERM_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USED_SPACE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FREE_SPACE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS)
+        </td>
+    </tr>
+    rows += 1;
+}
+
+</table>

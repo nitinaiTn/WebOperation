@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gsb_adm_fvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="device_info$">
+    <Key>
+      <PropertyRef Name="DEVICE_ID" />
+    </Key>
+    <Property Name="DEVICE_ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TERM_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="DEPT_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="TYPE_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="BRAND_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODEL_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_SEQ" Type="nvarchar" MaxLength="255" />
+    <Property Name="COUNTER_CODE" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_IP" Type="nvarchar" MaxLength="255" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_NAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_ADDR" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_LOCATION" Type="nvarchar" MaxLength="255" />
+    <Property Name="TERM_ZONE" Type="float" />
+    <Property Name="CONTROL_BY" Type="nvarchar" MaxLength="255" />
+    <Property Name="REPLENISH_BY" Type="nvarchar" MaxLength="255" />
+    <Property Name="POST" Type="nvarchar" MaxLength="255" />
+    <Property Name="INSTALL_DATE" Type="datetime" />
+    <Property Name="ACTIVE_DATE" Type="datetime" />
+    <Property Name="SERVICE_TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="INSTALL_TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LAYOUT_TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="MAN_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="SERVICEMAN_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="COMPANY_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="COMPANY_NAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="SERVICE_BEGINDATE" Type="datetime" />
+    <Property Name="SERVICE_ENDDATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SERVICE_YEARS" Type="nvarchar" MaxLength="255" />
+    <Property Name="IS_CCTV" Type="nvarchar" MaxLength="255" />
+    <Property Name="IS_UPS" Type="float" />
+    <Property Name="IS_INTERNATIONAL" Type="nvarchar" MaxLength="255" />
+    <Property Name="BUSINESS_BEGINTIME" Type="nvarchar" MaxLength="255" />
+    <Property Name="BUSINESS_ENDTIME" Type="datetime" />
+    <Property Name="IS_VIP" Type="nvarchar" MaxLength="255" />
+    <Property Name="AREA_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="AREA_ADDR" Type="float" />
+    <Property Name="FUNCTION_TYPE" Type="float" />
+    <Property Name="LONGITUDE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LATITUDE" Type="nvarchar" MaxLength="255" />
+    <Property Name="PROVINCE" Type="nvarchar" MaxLength="255" />
+    <Property Name="LOT_TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="AUDITING" Type="float" />
+    <Property Name="CURRENT_IP" Type="nvarchar" MaxLength="255" />
+    <Property Name="VERSION_ATMC" Type="nvarchar" MaxLength="255" />
+    <Property Name="VERSION_SP" Type="nvarchar" MaxLength="255" />
+    <Property Name="VERSION_AGENT" Type="nvarchar" MaxLength="255" />
+    <Property Name="VERSION_MB" Type="nvarchar" MaxLength="255" />
+    <Property Name="FLAG_XFS" Type="float" />
+    <Property Name="FLAG_EJ" Type="float" />
+    <Property Name="FLAG_FSN" Type="float" />
+    <Property Name="EJ_FILES" Type="nvarchar" MaxLength="255" />
+    <Property Name="FSN_PATH" Type="nvarchar" MaxLength="255" />
+    <Property Name="TASK_PARA" Type="nvarchar" MaxLength="255" />
+    <Property Name="VERSION_AD" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODIFY_USERID" Type="nvarchar" MaxLength="255" />
+    <Property Name="MODIFY_DATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADD_USERID" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADD_DATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ASSET_NO" Type="nvarchar" MaxLength="255" />
+    <Property Name="CASH_BOX_NUM" Type="nvarchar" MaxLength="255" />
+    <Property Name="SERVICE_SMS_TYPE" Type="nvarchar" MaxLength="255" />
+    <Property Name="EJ_OPEN_DATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ATMC_UPDATE_TIME" Type="datetime" />
+    <Property Name="SP_UPDATE_TIME" Type="datetime" />
+    <Property Name="AGENT_UPDATE_TIME" Type="datetime" />
+    <Property Name="VERSION_NV" Type="nvarchar" MaxLength="255" />
+    <Property Name="NV_UPDATE_TIME" Type="datetime" />
+    <Property Name="VERSION_MAIN" Type="nvarchar" MaxLength="255" />
+    <Property Name="MAIN_UPDATE_TIME" Type="datetime" />
+  </EntityType>
+  <EntityType Name="device_info_system$">
+    <Key>
+      <PropertyRef Name="SYSTEM_ID" />
+    </Key>
+    <Property Name="SYSTEM_ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TERM_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="SYSTEM_NAME" Type="nvarchar" MaxLength="255" />
+    <Property Name="SYSTEM_RAM" Type="float" />
+    <Property Name="SYSTEM_RAM_RATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="SYSTEM_CPU" Type="nvarchar" MaxLength="255" />
+    <Property Name="SYSTEM_CPU_RATE" Type="nvarchar" MaxLength="255" />
+    <Property Name="DISK_USAGE" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_IP" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_MASK" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_GATEWAY" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_DNS" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_DNS_BAK" Type="nvarchar" MaxLength="255" />
+    <Property Name="ADDR_MAC" Type="nvarchar" MaxLength="255" />
+    <Property Name="REFLESH_DATE" Type="datetime" />
+    <Property Name="MEMO" Type="nvarchar" MaxLength="255" />
+    <Property Name="SYSTEM_VOLUME" Type="float" />
+    <Property Name="SYSTEM_DATE" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="gsb_adm_fvModelStoreContainer">
+    <EntitySet Name="device_info$" EntityType="Self.device_info$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="device_info_system$" EntityType="Self.device_info_system$" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

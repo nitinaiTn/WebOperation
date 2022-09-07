@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gsb_adm_fvModelStoreContainer" CdmEntityContainer="gsb_adm_fvEntities2">
+    <EntitySetMapping Name="device_info_">
+      <EntityTypeMapping TypeName="gsb_adm_fvModel.device_info_">
+        <MappingFragment StoreEntitySet="device_info$">
+          <ScalarProperty Name="DEVICE_ID" ColumnName="DEVICE_ID" />
+          <ScalarProperty Name="TERM_ID" ColumnName="TERM_ID" />
+          <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+          <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+          <ScalarProperty Name="BRAND_ID" ColumnName="BRAND_ID" />
+          <ScalarProperty Name="MODEL_ID" ColumnName="MODEL_ID" />
+          <ScalarProperty Name="TERM_SEQ" ColumnName="TERM_SEQ" />
+          <ScalarProperty Name="COUNTER_CODE" ColumnName="COUNTER_CODE" />
+          <ScalarProperty Name="TERM_IP" ColumnName="TERM_IP" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="TERM_NAME" ColumnName="TERM_NAME" />
+          <ScalarProperty Name="TERM_ADDR" ColumnName="TERM_ADDR" />
+          <ScalarProperty Name="TERM_LOCATION" ColumnName="TERM_LOCATION" />
+          <ScalarProperty Name="TERM_ZONE" ColumnName="TERM_ZONE" />
+          <ScalarProperty Name="CONTROL_BY" ColumnName="CONTROL_BY" />
+          <ScalarProperty Name="REPLENISH_BY" ColumnName="REPLENISH_BY" />
+          <ScalarProperty Name="POST" ColumnName="POST" />
+          <ScalarProperty Name="INSTALL_DATE" ColumnName="INSTALL_DATE" />
+          <ScalarProperty Name="ACTIVE_DATE" ColumnName="ACTIVE_DATE" />
+          <ScalarProperty Name="SERVICE_TYPE" ColumnName="SERVICE_TYPE" />
+          <ScalarProperty Name="INSTALL_TYPE" ColumnName="INSTALL_TYPE" />
+          <ScalarProperty Name="LAYOUT_TYPE" ColumnName="LAYOUT_TYPE" />
+          <ScalarProperty Name="MAN_ID" ColumnName="MAN_ID" />
+          <ScalarProperty Name="SERVICEMAN_ID" ColumnName="SERVICEMAN_ID" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+          <ScalarProperty Name="SERVICE_BEGINDATE" ColumnName="SERVICE_BEGINDATE" />
+          <ScalarProperty Name="SERVICE_ENDDATE" ColumnName="SERVICE_ENDDATE" />
+          <ScalarProperty Name="SERVICE_YEARS" ColumnName="SERVICE_YEARS" />
+          <ScalarProperty Name="IS_CCTV" ColumnName="IS_CCTV" />
+          <ScalarProperty Name="IS_UPS" ColumnName="IS_UPS" />
+          <ScalarProperty Name="IS_INTERNATIONAL" ColumnName="IS_INTERNATIONAL" />
+          <ScalarProperty Name="BUSINESS_BEGINTIME" ColumnName="BUSINESS_BEGINTIME" />
+          <ScalarProperty Name="BUSINESS_ENDTIME" ColumnName="BUSINESS_ENDTIME" />
+          <ScalarProperty Name="IS_VIP" ColumnName="IS_VIP" />
+          <ScalarProperty Name="AREA_ID" ColumnName="AREA_ID" />
+          <ScalarProperty Name="AREA_ADDR" ColumnName="AREA_ADDR" />
+          <ScalarProperty Name="FUNCTION_TYPE" ColumnName="FUNCTION_TYPE" />
+          <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+          <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+          <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+          <ScalarProperty Name="LOT_TYPE" ColumnName="LOT_TYPE" />
+          <ScalarProperty Name="AUDITING" ColumnName="AUDITING" />
+          <ScalarProperty Name="CURRENT_IP" ColumnName="CURRENT_IP" />
+          <ScalarProperty Name="VERSION_ATMC" ColumnName="VERSION_ATMC" />
+          <ScalarProperty Name="VERSION_SP" ColumnName="VERSION_SP" />
+          <ScalarProperty Name="VERSION_AGENT" ColumnName="VERSION_AGENT" />
+          <ScalarProperty Name="VERSION_MB" ColumnName="VERSION_MB" />
+          <ScalarProperty Name="FLAG_XFS" ColumnName="FLAG_XFS" />
+          <ScalarProperty Name="FLAG_EJ" ColumnName="FLAG_EJ" />
+          <ScalarProperty Name="FLAG_FSN" ColumnName="FLAG_FSN" />
+          <ScalarProperty Name="EJ_FILES" ColumnName="EJ_FILES" />
+          <ScalarProperty Name="FSN_PATH" ColumnName="FSN_PATH" />
+          <ScalarProperty Name="TASK_PARA" ColumnName="TASK_PARA" />
+          <ScalarProperty Name="VERSION_AD" ColumnName="VERSION_AD" />
+          <ScalarProperty Name="MODIFY_USERID" ColumnName="MODIFY_USERID" />
+          <ScalarProperty Name="MODIFY_DATE" ColumnName="MODIFY_DATE" />
+          <ScalarProperty Name="ADD_USERID" ColumnName="ADD_USERID" />
+          <ScalarProperty Name="ADD_DATE" ColumnName="ADD_DATE" />
+          <ScalarProperty Name="ASSET_NO" ColumnName="ASSET_NO" />
+          <ScalarProperty Name="CASH_BOX_NUM" ColumnName="CASH_BOX_NUM" />
+          <ScalarProperty Name="SERVICE_SMS_TYPE" ColumnName="SERVICE_SMS_TYPE" />
+          <ScalarProperty Name="EJ_OPEN_DATE" ColumnName="EJ_OPEN_DATE" />
+          <ScalarProperty Name="ATMC_UPDATE_TIME" ColumnName="ATMC_UPDATE_TIME" />
+          <ScalarProperty Name="SP_UPDATE_TIME" ColumnName="SP_UPDATE_TIME" />
+          <ScalarProperty Name="AGENT_UPDATE_TIME" ColumnName="AGENT_UPDATE_TIME" />
+          <ScalarProperty Name="VERSION_NV" ColumnName="VERSION_NV" />
+          <ScalarProperty Name="NV_UPDATE_TIME" ColumnName="NV_UPDATE_TIME" />
+          <ScalarProperty Name="VERSION_MAIN" ColumnName="VERSION_MAIN" />
+          <ScalarProperty Name="MAIN_UPDATE_TIME" ColumnName="MAIN_UPDATE_TIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="device_info_system_">
+      <EntityTypeMapping TypeName="gsb_adm_fvModel.device_info_system_">
+        <MappingFragment StoreEntitySet="device_info_system$">
+          <ScalarProperty Name="SYSTEM_ID" ColumnName="SYSTEM_ID" />
+          <ScalarProperty Name="TERM_ID" ColumnName="TERM_ID" />
+          <ScalarProperty Name="SYSTEM_NAME" ColumnName="SYSTEM_NAME" />
+          <ScalarProperty Name="SYSTEM_RAM" ColumnName="SYSTEM_RAM" />
+          <ScalarProperty Name="SYSTEM_RAM_RATE" ColumnName="SYSTEM_RAM_RATE" />
+          <ScalarProperty Name="SYSTEM_CPU" ColumnName="SYSTEM_CPU" />
+          <ScalarProperty Name="SYSTEM_CPU_RATE" ColumnName="SYSTEM_CPU_RATE" />
+          <ScalarProperty Name="DISK_USAGE" ColumnName="DISK_USAGE" />
+          <ScalarProperty Name="ADDR_IP" ColumnName="ADDR_IP" />
+          <ScalarProperty Name="ADDR_MASK" ColumnName="ADDR_MASK" />
+          <ScalarProperty Name="ADDR_GATEWAY" ColumnName="ADDR_GATEWAY" />
+          <ScalarProperty Name="ADDR_DNS" ColumnName="ADDR_DNS" />
+          <ScalarProperty Name="ADDR_DNS_BAK" ColumnName="ADDR_DNS_BAK" />
+          <ScalarProperty Name="ADDR_MAC" ColumnName="ADDR_MAC" />
+          <ScalarProperty Name="REFLESH_DATE" ColumnName="REFLESH_DATE" />
+          <ScalarProperty Name="MEMO" ColumnName="MEMO" />
+          <ScalarProperty Name="SYSTEM_VOLUME" ColumnName="SYSTEM_VOLUME" />
+          <ScalarProperty Name="SYSTEM_DATE" ColumnName="SYSTEM_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

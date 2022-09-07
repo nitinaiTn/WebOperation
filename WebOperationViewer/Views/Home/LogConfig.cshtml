@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebOperationViewer.ViewModels.LogConfigViewModel>
+
+@{
+    int rows = 1;
+    int startcount = 0;
+    ViewBag.Title = "LogConfig";
+}
+
+<h2>LogConfig</h2>
+
+<div>
+    <p>
+        @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchForm" }))
+        {
+            <b>Terminal ID : </b>
+            <input type="text" id="searchlogconfig" name="searchlogconfig" placeholder="" />
+            <input type="submit" name="submit" />
+        }
+    </p>
+
+    <div>
+        <a href="@Url.Action("LogConfig","Home")" style="color:crimson">Refresh Page</a>
+        <a href="@Url.Action("ExportToExcelLogConfig","Home")">Download Excel</a>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TERM_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TERM_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONFIG_DAY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UPDATE_DATE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @(rows + startcount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TERM_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TERM_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONFIG_DAY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UPDATE_DATE)
+        </td>
+    </tr>
+    rows += 1;
+}
+
+</table>

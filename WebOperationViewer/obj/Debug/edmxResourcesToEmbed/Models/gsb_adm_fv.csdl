@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gsb_adm_fvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="device_info_">
+    <Key>
+      <PropertyRef Name="DEVICE_ID" />
+    </Key>
+    <Property Name="DEVICE_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TERM_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DEPT_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TYPE_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BRAND_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MODEL_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_SEQ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="COUNTER_CODE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_IP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="STATUS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_ADDR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_LOCATION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TERM_ZONE" Type="Double" />
+    <Property Name="CONTROL_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="REPLENISH_BY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="POST" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="INSTALL_DATE" Type="DateTime" Precision="3" />
+    <Property Name="ACTIVE_DATE" Type="DateTime" Precision="3" />
+    <Property Name="SERVICE_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="INSTALL_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LAYOUT_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MAN_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SERVICEMAN_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="COMPANY_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="COMPANY_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SERVICE_BEGINDATE" Type="DateTime" Precision="3" />
+    <Property Name="SERVICE_ENDDATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SERVICE_YEARS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IS_CCTV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IS_UPS" Type="Double" />
+    <Property Name="IS_INTERNATIONAL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BUSINESS_BEGINTIME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BUSINESS_ENDTIME" Type="DateTime" Precision="3" />
+    <Property Name="IS_VIP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AREA_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AREA_ADDR" Type="Double" />
+    <Property Name="FUNCTION_TYPE" Type="Double" />
+    <Property Name="LONGITUDE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LATITUDE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PROVINCE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LOT_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AUDITING" Type="Double" />
+    <Property Name="CURRENT_IP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION_ATMC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION_SP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION_AGENT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION_MB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FLAG_XFS" Type="Double" />
+    <Property Name="FLAG_EJ" Type="Double" />
+    <Property Name="FLAG_FSN" Type="Double" />
+    <Property Name="EJ_FILES" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FSN_PATH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TASK_PARA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VERSION_AD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MODIFY_USERID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MODIFY_DATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADD_USERID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADD_DATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ASSET_NO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CASH_BOX_NUM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SERVICE_SMS_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="EJ_OPEN_DATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ATMC_UPDATE_TIME" Type="DateTime" Precision="3" />
+    <Property Name="SP_UPDATE_TIME" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_UPDATE_TIME" Type="DateTime" Precision="3" />
+    <Property Name="VERSION_NV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NV_UPDATE_TIME" Type="DateTime" Precision="3" />
+    <Property Name="VERSION_MAIN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MAIN_UPDATE_TIME" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="device_info_system_">
+    <Key>
+      <PropertyRef Name="SYSTEM_ID" />
+    </Key>
+    <Property Name="SYSTEM_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TERM_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SYSTEM_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SYSTEM_RAM" Type="Double" />
+    <Property Name="SYSTEM_RAM_RATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SYSTEM_CPU" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SYSTEM_CPU_RATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DISK_USAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_IP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_MASK" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_GATEWAY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_DNS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_DNS_BAK" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ADDR_MAC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="REFLESH_DATE" Type="DateTime" Precision="3" />
+    <Property Name="MEMO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SYSTEM_VOLUME" Type="Double" />
+    <Property Name="SYSTEM_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="gsb_adm_fvEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="device_info_" EntityType="Self.device_info_" />
+    <EntitySet Name="device_info_system_" EntityType="Self.device_info_system_" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sladbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="devfwversion_record$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TERM_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="CRM_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="PIN_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="IDC_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="PTR_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="BCR_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="SIU_VERSION" Type="nvarchar" MaxLength="255" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="logconfig_record$">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="TERM_ID" Type="nvarchar" MaxLength="255" />
+    <Property Name="CONFIG_DAY" Type="float" />
+    <Property Name="UPDATE_DATE" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="sladbModelStoreContainer">
+    <EntitySet Name="devfwversion_record$" EntityType="Self.devfwversion_record$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logconfig_record$" EntityType="Self.logconfig_record$" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

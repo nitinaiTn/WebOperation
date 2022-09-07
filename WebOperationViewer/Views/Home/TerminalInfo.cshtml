@@ -1,0 +1,167 @@
+﻿@model IEnumerable<WebOperationViewer.ViewModels.FirmwareInfoViewModel>
+@using WebOperationViewer.Models;
+
+@{
+    ViewBag.Title = "TerminalInfo";
+    int rows = 1;
+    int startcount = 0;
+    DataPager pager = new DataPager();
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        startcount = (pager.CurrentPage - 1) * pager.PageSize;
+    }
+}
+
+<body>
+    <!-- pager -->
+    <div class="container">
+        @if (pager.TotalPage > 0)
+        {
+            <ul class="pagination justify-content-end">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                    </li>
+                }
+                @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPage)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+    <div>
+        <p>
+            @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "searchForm" }))
+            {
+                <b>Terminal ID : </b>
+                <input type="text" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                <input type="submit" name="submit" onclick="submitBt()" />
+            }
+        </p>
+
+        <p>
+            @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
+            {
+                <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                    <option>เลือกรายการต่อหน้า</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
+                    <option value=1000>1000</option>
+                </select>
+            }
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        function SelectedIndexChanged() {
+            document.getElementById('listForm').submit();
+        }
+        function submitBt() {
+            document.getElementById('searchForm').submit();
+        }
+    </script>
+
+    <div>
+        <a href="@Url.Action("TerminalInfo","Home")" style="color:crimson">Refresh Page</a>
+        <a href="@Url.Action("ExportToExcelTermianal","Home")">Download Excel</a>
+    </div>
+
+
+    <h6>Next Update Time : @DateTime.Now</h6>
+
+    <table class="table">
+        <tr class="bg-danger">
+            <th>
+
+            </th>
+            <th>
+                TERM_ID
+            </th>
+            <th>
+                TERM_NAME
+            </th>
+            <th>
+                CRM_VERSION
+            </th>
+            <th>
+                PIN_VERSION
+            </th>
+            <th>
+                IDC_VERSION
+            </th>
+            <th>
+                PTR_VERSION
+            </th>
+            <th>
+                BCR_VERSION
+            </th>
+            <th>
+                SIU_VERSION
+            </th>
+            <th>
+                UPDATE_DATE
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(startcount + rows)
+                </td>
+                <td>
+                    @item.TERM_ID
+                </td>
+                <td>
+                    @item.TERM_NAME
+                </td>
+                <td>
+                    @item.CRM_VERSION
+                </td>
+                <td>
+                    @item.PIN_VERSION
+                </td>
+                <td>
+                    @item.IDC_VERSION
+                </td>
+                <td>
+                    @item.PTR_VERSION
+                </td>
+                <td>
+                    @item.BCR_VERSION
+                </td>
+                <td>
+                    @item.SIU_VERSION
+                </td>
+                <td>
+                    @item.UPDATE_DATE
+                </td>
+            </tr>
+            rows += 1;
+        }
+
+    </table>
+</body>
+
+
+

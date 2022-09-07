@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sladbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="devfwversion_record_">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TERM_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CRM_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PIN_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IDC_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PTR_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="BCR_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SIU_VERSION" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="logconfig_record_">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TERM_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CONFIG_DAY" Type="Double" />
+    <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="sladbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="devfwversion_record_" EntityType="Self.devfwversion_record_" />
+    <EntitySet Name="logconfig_record_" EntityType="Self.logconfig_record_" />
+  </EntityContainer>
+</Schema>

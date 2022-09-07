@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sladbModelStoreContainer" CdmEntityContainer="sladbEntities1">
+    <EntitySetMapping Name="devfwversion_record_">
+      <EntityTypeMapping TypeName="sladbModel.devfwversion_record_">
+        <MappingFragment StoreEntitySet="devfwversion_record$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TERM_ID" ColumnName="TERM_ID" />
+          <ScalarProperty Name="CRM_VERSION" ColumnName="CRM_VERSION" />
+          <ScalarProperty Name="PIN_VERSION" ColumnName="PIN_VERSION" />
+          <ScalarProperty Name="IDC_VERSION" ColumnName="IDC_VERSION" />
+          <ScalarProperty Name="PTR_VERSION" ColumnName="PTR_VERSION" />
+          <ScalarProperty Name="BCR_VERSION" ColumnName="BCR_VERSION" />
+          <ScalarProperty Name="SIU_VERSION" ColumnName="SIU_VERSION" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logconfig_record_">
+      <EntityTypeMapping TypeName="sladbModel.logconfig_record_">
+        <MappingFragment StoreEntitySet="logconfig_record$">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TERM_ID" ColumnName="TERM_ID" />
+          <ScalarProperty Name="CONFIG_DAY" ColumnName="CONFIG_DAY" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
