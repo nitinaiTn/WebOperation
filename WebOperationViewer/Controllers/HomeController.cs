@@ -128,13 +128,37 @@ namespace WebOperationViewer.Controllers
             }
         }
 
-        public ActionResult LogConfig(string searchlogconfig)
+        public ActionResult LogConfig(string searchlogconfig, int? list365)
         {
+            if (Session["listGen365"] == null)
+            {
+                Session["listGen365"] = 365;
+            }
+            if(searchlogconfig == null && list365 == null)
+            {
+                list365 = Convert.ToInt32(Session["listgen365"]);
+            }
+            else if(searchlogconfig != null && list365 != null)
+            {
+                Session["listGen365"] = list365;
+            }
+            else if (searchlogconfig != null && list365 == null)
+            {
+
+            }
+            else if (searchlogconfig == null && list365 != null)
+            {
+                Session["listGen365"] = list365;
+            }
+
             var LogInfo = (from loginfo in slaDB.logconfig_record_
                            select loginfo).ToList();
             var deviceInfo = (from devinfo in gsbDB.device_info_
                               select devinfo).ToList();
-            if (String.IsNullOrEmpty(searchlogconfig))
+
+            
+
+            if (String.IsNullOrEmpty(searchlogconfig) && list365 == null)
             {
                 var LogConfigInfo = (from loginfo in LogInfo
                                      join devinfo in deviceInfo
@@ -146,6 +170,20 @@ namespace WebOperationViewer.Controllers
                                          CONFIG_DAY = loginfo.CONFIG_DAY,
                                          UPDATE_DATE = loginfo.UPDATE_DATE,
                                      }).ToList();
+                return View(LogConfigInfo);
+            }
+            else if (list365 != null)
+            {
+                var LogConfigInfo = (from loginfo in LogInfo
+                                     join devinfo in deviceInfo
+                                     on loginfo.TERM_ID equals devinfo.TERM_ID
+                                     select new LogConfigViewModel
+                                     {
+                                         TERM_ID = loginfo.TERM_ID,
+                                         TERM_NAME = devinfo.TERM_NAME,
+                                         CONFIG_DAY = loginfo.CONFIG_DAY,
+                                         UPDATE_DATE = loginfo.UPDATE_DATE,
+                                     }).Where(x => x.CONFIG_DAY.ToString().Contains(list365.ToString())).ToList();
                 return View(LogConfigInfo);
             }
             else
@@ -161,10 +199,11 @@ namespace WebOperationViewer.Controllers
                                          UPDATE_DATE = loginfo.UPDATE_DATE,
                                      }).Where(x => x.TERM_ID.Contains(searchlogconfig)).ToList();
                 return View(LogConfigInfo);
-            }    
+            }
+            
         }
 
-        public ActionResult Partition(String searchpartition)
+        public ActionResult Partition(String searchpartition, int? page, int? listpage)
         {
             var deviceInfo = (from devinfo in gsbDB.device_info_
                               select devinfo).ToList();
