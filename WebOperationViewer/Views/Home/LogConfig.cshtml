@@ -1,12 +1,50 @@
 ﻿@model IEnumerable<WebOperationViewer.ViewModels.LogConfigViewModel>
+@using WebOperationViewer.Models
 
 @{
     int rows = 1;
     int startcount = 0;
     ViewBag.Title = "LogConfig";
+    DataPager pager = new DataPager();
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        startcount = (pager.CurrentPage - 1) * pager.PageSize;
+    }
 }
 
-<h2>LogConfig</h2>
+<!-- pager -->
+<div class="container">
+    @if (pager.TotalPage > 0)
+    {
+        <ul class="pagination justify-content-end">
+            @if (pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a href="~/Home/LogConfig?page=@(1)">หน้าแรก</a>
+                </li>
+                <li class="page-item">
+                    <a href="~/Home/LogConfig?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                </li>
+            }
+            @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+            {
+                <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                    <a href="~/Home/LogConfig?page=@(i)">@i</a>
+                </li>
+            }
+            @if (pager.CurrentPage < pager.TotalPage)
+            {
+                <li class="page-item">
+                    <a href="~/Home/LogConfig?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                </li>
+                <li class="page-item">
+                    <a href="~/Home/LogConfig?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
 
 <div>
     <p>
@@ -22,7 +60,20 @@
         @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchList" }))
         {
             <b>จำนวนวัน : </b>
-            <select class="list365" id="list365" name = "list365" onchange="SelectedIndexChanged()">
+            <select class="list365" id="list365" name="list365" onchange="SelectedList()">
+            </select>
+        }
+    </p>
+
+    <p>
+        @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "listForm" }))
+        {
+            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+            <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                <option>เลือกรายการต่อหน้า</option>
+                <option value=50>50</option>
+                <option value=100>100</option>
+                <option value=1000>1000</option>
             </select>
         }
     </p>
@@ -35,21 +86,28 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+
     $(function () {
         var $select = $(".list365");
         for (i = 1; i <= 365; i++) {
             $select.append($('<option></option>').val(i).html(i))
         }
     });
+
 </script>
 
 <script type="text/javascript">
+
     function submitList365() {
         document.getElementById('searchForm').submit();
     }
-    function SelectedIndexChanged() {
+    function SelectedList() {
         document.getElementById('searchList').submit();
     }
+    function SelectedIndexChanged() {
+        document.getElementById('listForm').submit();
+    }
+
 </script>
 
 <table class="table">

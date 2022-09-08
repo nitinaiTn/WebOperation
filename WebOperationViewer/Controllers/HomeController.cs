@@ -128,7 +128,7 @@ namespace WebOperationViewer.Controllers
             }
         }
 
-        public ActionResult LogConfig(string searchlogconfig, int? list365)
+        public ActionResult LogConfig(string searchlogconfig, int? list365, int? page, int? listpage)//Controller LogCongfig
         {
             if (Session["listGen365"] == null)
             {
@@ -151,6 +151,32 @@ namespace WebOperationViewer.Controllers
                 Session["listGen365"] = list365;
             }
 
+            int pageTemp = 1;
+            int listPageTemp = 1000;
+
+            if (Session["currentListPage"] == null)
+            {
+                Session["currentListPage"] = 1000;
+            }
+            if (page != null)
+            {
+                pageTemp = Convert.ToInt32(page);
+            }
+            if (listpage != null)
+            {
+                listPageTemp = Convert.ToInt32(listpage);
+                Session["currentListPage"] = Convert.ToInt32(listpage);
+            }
+            else
+            {
+                listPageTemp = Convert.ToInt32(Session["currentListPage"].ToString());
+            }
+            if (searchlogconfig != null && page == null && listpage == null)
+            {
+                pageTemp = 1;
+                listPageTemp = slaDB.devfwversion_record_.Where(s => s.TERM_ID.Contains(searchlogconfig)).ToList().Count();
+            }
+
             var LogInfo = (from loginfo in slaDB.logconfig_record_
                            select loginfo).ToList();
             var deviceInfo = (from devinfo in gsbDB.device_info_
@@ -160,6 +186,18 @@ namespace WebOperationViewer.Controllers
 
             if (String.IsNullOrEmpty(searchlogconfig) && list365 == null)
             {
+                int pagesize = listPageTemp;
+
+                int rowCount = slaDB.devfwversion_record_.Count();
+                if (page < 1)
+                {
+                    page = 1;
+                }
+
+                var pager = new DataPager(rowCount, Convert.ToInt32(pageTemp), pagesize);
+                int skipRows = (pageTemp - 1) * pagesize;
+                ViewBag.Pager = pager;
+
                 var LogConfigInfo = (from loginfo in LogInfo
                                      join devinfo in deviceInfo
                                      on loginfo.TERM_ID equals devinfo.TERM_ID
@@ -169,11 +207,12 @@ namespace WebOperationViewer.Controllers
                                          TERM_NAME = devinfo.TERM_NAME,
                                          CONFIG_DAY = loginfo.CONFIG_DAY,
                                          UPDATE_DATE = loginfo.UPDATE_DATE,
-                                     }).ToList();
+                                     }).Skip(skipRows).Take(pagesize).ToList();
                 return View(LogConfigInfo);
             }
             else if (list365 != null)
             {
+
                 var LogConfigInfo = (from loginfo in LogInfo
                                      join devinfo in deviceInfo
                                      on loginfo.TERM_ID equals devinfo.TERM_ID
@@ -203,8 +242,35 @@ namespace WebOperationViewer.Controllers
             
         }
 
-        public ActionResult Partition(String searchpartition, int? page, int? listpage)
+        public ActionResult Partition(String searchpartition, int? page, int? listpage)//Controller Partition
         {
+            int pageTemp = 1;
+            int listPageTemp = 1000;
+
+            if (Session["currentListPage"] == null)
+            {
+                Session["currentListPage"] = 1000;
+            }
+            if (page != null)
+            {
+                pageTemp = Convert.ToInt32(page);
+            }
+            if (listpage != null)
+            {
+                listPageTemp = Convert.ToInt32(listpage);
+                Session["currentListPage"] = Convert.ToInt32(listpage);
+            }
+            else
+            {
+                listPageTemp = Convert.ToInt32(Session["currentListPage"].ToString());
+            }
+            if (searchpartition != null && page == null && listpage == null)
+            {
+                pageTemp = 1;
+                listPageTemp = slaDB.devfwversion_record_.Where(s => s.TERM_ID.Contains(searchpartition)).ToList().Count();
+            }
+
+
             var deviceInfo = (from devinfo in gsbDB.device_info_
                               select devinfo).ToList();
 
@@ -227,6 +293,18 @@ namespace WebOperationViewer.Controllers
 
             if (String.IsNullOrEmpty(searchpartition))
             {
+                int pagesize = listPageTemp;
+                
+                int rowCount = slaDB.devfwversion_record_.Count();
+                if (page < 1)
+                {
+                    page = 1;
+                }
+
+                var pager = new DataPager(rowCount, Convert.ToInt32(pageTemp), pagesize);
+                int skipRows = (pageTemp - 1) * pagesize;
+                ViewBag.Pager = pager;
+
                 partitionInfoAfterSpilt = (from DataRow dr in dt.Rows
                                            select new DeviceInfoViewModel
                                            {
@@ -235,10 +313,23 @@ namespace WebOperationViewer.Controllers
                                                USED_SPACE = dr["USED_SPACE"].ToString(),
                                                FREE_SPACE = dr["FREE_SPACE"].ToString(),
                                                STATUS = dr["STATUS"].ToString()
-                                           }).ToList();
+                                           }).Skip(skipRows).Take(pagesize).ToList();
                 return View(partitionInfoAfterSpilt);
             }
             else{
+
+                int pagesize = listPageTemp;
+
+                int rowCount = slaDB.devfwversion_record_.Count();
+                if (page < 1)
+                {
+                    page = 1;
+                }
+
+                var pager = new DataPager(rowCount, Convert.ToInt32(pageTemp), pagesize);
+                int skipRows = (pageTemp - 1) * pagesize;
+                ViewBag.Pager = pager;
+
                 partitionInfoAfterSpilt = (from DataRow dr in dt.Rows
                                            select new DeviceInfoViewModel
                                            {
@@ -247,7 +338,7 @@ namespace WebOperationViewer.Controllers
                                                USED_SPACE = dr["USED_SPACE"].ToString(),
                                                FREE_SPACE = dr["FREE_SPACE"].ToString(),
                                                STATUS = dr["STATUS"].ToString()
-                                           }).Where(x => x.TERM_ID.Contains(searchpartition)).ToList();
+                                           }).Where(x => x.TERM_ID.Contains(searchpartition)).Skip(skipRows).Take(pagesize).ToList();
                 return View(partitionInfoAfterSpilt);
             }
         }

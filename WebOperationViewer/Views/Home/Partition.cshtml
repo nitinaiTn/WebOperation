@@ -19,25 +19,25 @@
             @if (pager.CurrentPage > 1)
             {
                 <li class="page-item">
-                    <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
+                    <a href="~/Home/Partition?page=@(1)">หน้าแรก</a>
                 </li>
                 <li class="page-item">
-                    <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                    <a href="~/Home/Partition?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
                 </li>
             }
             @for (var i = pager.StartPage; i <= pager.EndPage; i++)
             {
                 <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                    <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
+                    <a href="~/Home/Partition?page=@(i)">@i</a>
                 </li>
             }
             @if (pager.CurrentPage < pager.TotalPage)
             {
                 <li class="page-item">
-                    <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                    <a href="~/Home/Partition?page=@(pager.CurrentPage + 1)">ถัดไป</a>
                 </li>
                 <li class="page-item">
-                    <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                    <a href="~/Home/Partition?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
                 </li>
             }
         </ul>
@@ -54,11 +54,32 @@
         }
     </p>
 
+    <p>
+        @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "listForm" }))
+        {
+            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+            <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                <option>เลือกรายการต่อหน้า</option>
+                <option value=50>50</option>
+                <option value=100>100</option>
+                <option value=1000>1000</option>
+            </select>
+        }
+    </p>
+
     <div>
         <a href="@Url.Action("Partition","Home")" style="color:crimson">Refresh Page</a>
         <a href="@Url.Action("ExportToExcelPartition","Home")">Download Excel</a>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    function SelectedIndexChanged() {
+        document.getElementById('listForm').submit();
+    }
+
+</script>
 
 <table class="table">
     <tr>
