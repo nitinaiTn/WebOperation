@@ -11,122 +11,175 @@
     }
 }
 
-<!-- pager -->
-<div class="container">
-    @if (pager.TotalPage > 0)
-    {
-        <ul class="pagination justify-content-end">
-            @if (pager.CurrentPage > 1)
-            {
-                <li class="page-item">
-                    <a href="~/Home/Partition?page=@(1)">หน้าแรก</a>
-                </li>
-                <li class="page-item">
-                    <a href="~/Home/Partition?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
-                </li>
-            }
-            @for (var i = pager.StartPage; i <= pager.EndPage; i++)
-            {
-                <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                    <a href="~/Home/Partition?page=@(i)">@i</a>
-                </li>
-            }
-            @if (pager.CurrentPage < pager.TotalPage)
-            {
-                <li class="page-item">
-                    <a href="~/Home/Partition?page=@(pager.CurrentPage + 1)">ถัดไป</a>
-                </li>
-                <li class="page-item">
-                    <a href="~/Home/Partition?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
-                </li>
-            }
-        </ul>
-    }
-</div>
+<body>
 
-<div>
-    <p>
-        @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "searchForm" }))
-        {
-            <b>Terminal ID : </b>
-            <input type="text" id="searchpartition" name="searchpartition" placeholder="" oninput="writeFunc()" />
-            <input type="submit" name="submit" onclick="submitBt()" />
-        }
-    </p>
+    @*<div>
+            <p>
+                @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "searchForm" }))
+                {
+                    <b>Terminal ID : </b>
+                    <input type="text" id="searchpartition" name="searchpartition" placeholder="" oninput="writeFunc()" />
+                    <input type="submit" name="submit" onclick="submitBt()" />
+                }
+            </p>
 
-    <p>
-        @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "listForm" }))
-        {
-            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-            <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
-                <option>เลือกรายการต่อหน้า</option>
-                <option value=50>50</option>
-                <option value=100>100</option>
-                <option value=1000>1000</option>
-            </select>
-        }
-    </p>
+            <p>
+                @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "listForm" }))
+                {
+                    <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                    <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                        <option>เลือกรายการต่อหน้า</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                        <option value=1000>1000</option>
+                    </select>
+                }
+            </p>
 
-    <div>
-        <a href="@Url.Action("Partition","Home")" style="color:crimson">Refresh Page</a>
-        <a href="@Url.Action("ExportToExcelPartition","Home")">Download Excel</a>
+            <div>
+                <a href="@Url.Action("Partition","Home")" style="color:crimson">Refresh Page</a>
+                <a href="@Url.Action("ExportToExcelPartition","Home")">Download Excel</a>
+            </div>
+        </div>*@
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "searchForm" }))
+                    {
+                        <div class="input-group">
+                            <label for="searchterminal"><b>Terminal ID :   </b></label>
+                            <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                            <button class="btn btn-default" type="submit" onclick="submitBt()">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+                <div class="col">
+                    @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
+                    {
+                        <div class="input-group mb-3">
+                            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                            <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                                <option selected>เลือกรายการต่อหน้า</option>
+                                <option value=50>50</option>
+                                <option value=100>100</option>
+                                <option value=1000>1000</option>
+                            </select>
+                        </div>
+                    }
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <a href="@Url.Action("Partition","Home")" class="btn btn-secondary">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    Refresh Table
+                                </a>
+                                <a href="@Url.Action("ExportToExcelPartition","Home")" class="btn btn-success">
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    Download Excel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    function SelectedIndexChanged() {
-        document.getElementById('listForm').submit();
-    }
+        function SelectedIndexChanged() {
+            document.getElementById('listForm').submit();
+        }
 
-</script>
+    </script>
 
-<table class="table">
-    <tr>
-        <th>
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TERM_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TERM_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USED_SPACE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FREE_SPACE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.STATUS)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @(startcount + rows)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TERM_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TERM_NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.USED_SPACE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FREE_SPACE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.STATUS)
-            </td>
-        </tr>
-        rows += 1;
-    }
+            <th>
 
-</table>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TERM_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TERM_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USED_SPACE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FREE_SPACE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STATUS)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(startcount + rows)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TERM_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TERM_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USED_SPACE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FREE_SPACE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STATUS)
+                </td>
+            </tr>
+            rows += 1;
+        }
+
+    </table>
+
+    <!-- pager -->
+    <div class="container">
+        @if (pager.TotalPage > 0)
+        {
+            <ul class="pagination justify-content-end">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/Partition?page=@(1)">หน้าแรก</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/Partition?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                    </li>
+                }
+                @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a href="~/Home/Partition?page=@(i)">@i</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPage)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/Partition?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/Partition?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+
+</body>
+

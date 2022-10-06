@@ -13,20 +13,6 @@
     }
 }
 
-@*<style>
-    /* Modify the background color */
-
-    .navbar-expand-lg {
-        background-color: lightgreen;
-    }
-        /* Modify brand and text color */
-
-        .navbar-expand-lg .navbar-brand,
-        .navbar-expand-lg .navbar-text {
-            color: green;
-        }
-</style>*@
-
 <body>
     <div class="shadow-lg p-3 mb-5 bg-white rounded">
         <div class="container">
@@ -56,18 +42,6 @@
                             </select>
                         </div>
                     }
-                    @*<p>
-            @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
-            {
-                <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-                <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
-                    <option>เลือกรายการต่อหน้า</option>
-                    <option value=50>50</option>
-                    <option value=100>100</option>
-                    <option value=1000>1000</option>
-                </select>
-            }
-        </p>*@
                 </div>
                 <div class="col">
                     <div class="container">
@@ -75,7 +49,7 @@
                             <div class="col">
                                 <a href="@Url.Action("TerminalInfo", "Home")" class="btn btn-secondary">
                                     <i class="fa fa-refresh" aria-hidden="true"></i>
-                                    Refresh Page
+                                    Refresh Table
                                 </a>
                                 <a href="@Url.Action("ExportToExcelTerminal", "Home")" class="btn btn-success">
                                     <i class="fa fa-file-excel-o" aria-hidden="true"></i>

@@ -13,143 +13,202 @@
     }
 }
 
-<!-- pager -->
-<div class="container">
-    @if (pager.TotalPage > 0)
-    {
-        <ul class="pagination justify-content-end">
-            @if (pager.CurrentPage > 1)
-            {
-                <li class="page-item">
-                    <a href="~/Home/LogConfig?page=@(1)">หน้าแรก</a>
-                </li>
-                <li class="page-item">
-                    <a href="~/Home/LogConfig?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
-                </li>
-            }
-            @for (var i = pager.StartPage; i <= pager.EndPage; i++)
-            {
-                <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                    <a href="~/Home/LogConfig?page=@(i)">@i</a>
-                </li>
-            }
-            @if (pager.CurrentPage < pager.TotalPage)
-            {
-                <li class="page-item">
-                    <a href="~/Home/LogConfig?page=@(pager.CurrentPage + 1)">ถัดไป</a>
-                </li>
-                <li class="page-item">
-                    <a href="~/Home/LogConfig?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
-                </li>
-            }
-        </ul>
-    }
-</div>
+<body>
 
-<div>
-    <p>
-        @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchForm" }))
-        {
-            <b>Terminal ID : </b>
-            <input type="text" id="searchlogconfig" name="searchlogconfig" placeholder="" />
-            <input type="submit" name="submit" />
-        }
-    </p>
+    @*<div>
+            <p>
+                @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchForm" }))
+                {
+                    <b>Terminal ID : </b>
+                    <input type="text" id="searchlogconfig" name="searchlogconfig" placeholder="" />
+                    <input type="submit" name="submit" />
+                }
+            </p>
 
-    <p>
-        @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchList" }))
-        {
-            <b>จำนวนวัน : </b>
-            <select class="list365" id="list365" name="list365" onchange="SelectedList()">
-            </select>
-        }
-    </p>
+            <p>
+                @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchList" }))
+                {
+                    <b>จำนวนวัน : </b>
+                    <select class="list365" id="list365" name="list365" onchange="SelectedList()">
+                    </select>
+                }
+            </p>
 
-    <p>
-        @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "listForm" }))
-        {
-            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-            <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
-                <option>เลือกรายการต่อหน้า</option>
-                <option value=50>50</option>
-                <option value=100>100</option>
-                <option value=1000>1000</option>
-            </select>
-        }
-    </p>
+            <p>
+                @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "listForm" }))
+                {
+                    <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                    <select name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                        <option>เลือกรายการต่อหน้า</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                        <option value=1000>1000</option>
+                    </select>
+                }
+            </p>
 
-    <div>
-        <a href="@Url.Action("LogConfig","Home")" style="color:crimson">Refresh Page</a>
-        <a href="@Url.Action("ExportToExcelLogConfig","Home")">Download Excel</a>
+            <div>
+                <a href="@Url.Action("LogConfig","Home")" style="color:crimson">Refresh Page</a>
+                <a href="@Url.Action("ExportToExcelLogConfig","Home")">Download Excel</a>
+            </div>
+        </div>*@
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchForm" }))
+                    {
+                        <div class="input-group">
+                            <label for="searchterminal"><b>Terminal ID :   </b></label>
+                            <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                            <button class="btn btn-default" type="submit" onclick="submitBt()">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+                <div class="col">
+                    @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchList" }))
+                    {
+                        <b>จำนวนวัน : </b>
+                        <select class="list365" id="list365" name="list365" onchange="SelectedList()">
+                        </select>
+                    }
+                </div>
+                <div class="col">
+                    @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "listForm" }))
+                    {
+                        <div class="input-group mb-3">
+                            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                            <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                                <option selected>เลือกรายการต่อหน้า</option>
+                                <option value=50>50</option>
+                                <option value=100>100</option>
+                                <option value=1000>1000</option>
+                            </select>
+                        </div>
+                    }
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <a href="@Url.Action("LogConfig","Home")" class="btn btn-secondary">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    Refresh Table
+                                </a>
+                                <a href="@Url.Action("ExportToExcelLogConfig","Home")" class="btn btn-success">
+                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                    Download Excel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
 
-    $(function () {
-        var $select = $(".list365");
-        for (i = 1; i <= 365; i++) {
-            $select.append($('<option></option>').val(i).html(i))
+        $(function () {
+            var $select = $(".list365");
+            for (i = 1; i <= 365; i++) {
+                $select.append($('<option></option>').val(i).html(i))
+            }
+        });
+
+    </script>
+
+    <script type="text/javascript">
+
+        function submitList365() {
+            document.getElementById('searchForm').submit();
         }
-    });
+        function SelectedList() {
+            document.getElementById('searchList').submit();
+        }
+        function SelectedIndexChanged() {
+            document.getElementById('listForm').submit();
+        }
 
-</script>
+    </script>
 
-<script type="text/javascript">
-
-    function submitList365() {
-        document.getElementById('searchForm').submit();
-    }
-    function SelectedList() {
-        document.getElementById('searchList').submit();
-    }
-    function SelectedIndexChanged() {
-        document.getElementById('listForm').submit();
-    }
-
-</script>
-
-<table class="table">
-    <tr>
-        <th>
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TERM_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TERM_NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONFIG_DAY)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UPDATE_DATE)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @(rows + startcount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TERM_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TERM_NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CONFIG_DAY)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UPDATE_DATE)
-            </td>
-        </tr>
-        rows += 1;
-    }
+            <th>
 
-</table>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TERM_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TERM_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CONFIG_DAY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UPDATE_DATE)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(rows + startcount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TERM_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TERM_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CONFIG_DAY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UPDATE_DATE)
+                </td>
+            </tr>
+            rows += 1;
+        }
+
+    </table>
+
+    <!-- pager -->
+    <div class="container">
+        @if (pager.TotalPage > 0)
+        {
+            <ul class="pagination justify-content-end">
+                @if (pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/LogConfig?page=@(1)">หน้าแรก</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/LogConfig?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                    </li>
+                }
+                @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                {
+                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                        <a href="~/Home/LogConfig?page=@(i)">@i</a>
+                    </li>
+                }
+                @if (pager.CurrentPage < pager.TotalPage)
+                {
+                    <li class="page-item">
+                        <a href="~/Home/LogConfig?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="~/Home/LogConfig?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</body>
