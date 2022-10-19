@@ -14,6 +14,7 @@ namespace WebOperationViewer.Controllers
 {
     public class HomeController : Controller
     {
+        //Create Object Map Entity Framwork
         private readonly sladbEntities1 slaDB = new sladbEntities1();
         private readonly gsb_adm_fvEntities2 gsbDB = new gsb_adm_fvEntities2();
         public ActionResult Index()
@@ -22,9 +23,9 @@ namespace WebOperationViewer.Controllers
         }
         public  ActionResult TerminalInfo(String searchterminal, int? page, int? listpage)
         {
-            int pageTemp = 1;
-            int listPageTemp = 1000;
-
+            int pageTemp = 1; // Set Default Page = 1
+            int listPageTemp = 1000; // Set Default Pagesize load 1000 row per page
+            //Cheack 
             if (Session["currentListPage"] == null)
             {
                 Session["currentListPage"] = 1000;
@@ -53,6 +54,7 @@ namespace WebOperationViewer.Controllers
 
         public ActionResult SearchTerminal(String searchterminal , int page, int listpage)
         {
+            //Check Search Box is Null ?
             if(String.IsNullOrEmpty(searchterminal))
             {
                 int pagesize = listpage;
@@ -67,7 +69,8 @@ namespace WebOperationViewer.Controllers
                 int skipRows = (page - 1) * pagesize;
                 ViewBag.Pager = pager;
 
-                var deviceInfo = (from devinfo in gsbDB.device_info_
+                //Quarry data from Database insert to List
+                var deviceInfo = (from devinfo in gsbDB.device_info_ 
                                   select devinfo).ToList();
 
                 var deviceFirmWare = (from devfw in slaDB.devfwversion_record_
@@ -89,7 +92,7 @@ namespace WebOperationViewer.Controllers
                                     }).Skip(skipRows).Take(pagesize).ToList();
                 return View(teminalInfo);
             }
-            else
+            else if(searchterminal != null && searchterminal == (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
             {
                 int pagesize = listpage;
                 int rowCount = slaDB.devfwversion_record_.Count();
@@ -125,6 +128,15 @@ namespace WebOperationViewer.Controllers
                                    }).Where(x => x.TERM_ID.Contains(searchterminal)).Skip(skipRows).Take(pagesize).ToList();
 
                 return View(teminalInfo);
+            }
+            else if(searchterminal != null && searchterminal != (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
+            {
+                List<TerminalViewModel> teminalInfo = new List<TerminalViewModel>();
+                return View(teminalInfo);
+            }
+            else
+            {
+                return View();
             }
         }
 
@@ -355,19 +367,24 @@ namespace WebOperationViewer.Controllers
             }
             foreach (T item in items)
             {
+                // Example Values[] = { TERM_ID , TERM_NAME, USED_SPACE, FREE_SPACE, STATUS}
                 var values = new object[Props.Length];
+                //Loop inserting property values to datatable rows
                 for (int i = 0; i < Props.Length; i++)
                 {
+                    //Split Text Disk Useg Column in Database
                     var tempSpilt = Props[5].GetValue(item, null).ToString().Split(',', ':', '/');
-                    //inserting property values to datatable rows
-                    if (i != 2 && i != 3 && i != 4) // Example Values[] = { TERM_ID , TERM_NAME, USED_SPACE, FREE_SPACE, STATUS}
+                    //Insert TermID, TermName
+                    if (i != 2 && i != 3 && i != 4) 
                         values[i] = Props[i].GetValue(item, null);
+                    //Cheack Disk F Missing?
                     if (tempSpilt[0] == "DiskF")
                     {
                         if (i == 2)
                             values[2] = tempSpilt[2];
                         else if (i == 3)
                             values[3] = Convert.ToInt32(tempSpilt[1]) - Convert.ToInt32(tempSpilt[2]);
+                        //Check disk space status
                         else if (i == 4)
                         {
                             if (Convert.ToInt32(tempSpilt[1]) / 2 > Convert.ToInt32(tempSpilt[2]))
@@ -386,8 +403,11 @@ namespace WebOperationViewer.Controllers
             //put a breakpoint here and check datatable
             return dataTable;
         }
-        public void ExportToExcelTerminal()//export terminal
+
+        //Export Device FrameWork Page To Excel File
+        public void ExportToExcelTerminal()
         {
+            //Quarry data in Database insert to List
             var deviceInfo = (from devinfo in gsbDB.device_info_
                               select devinfo).ToList();
 
@@ -411,8 +431,10 @@ namespace WebOperationViewer.Controllers
                                }).ToList();
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
             ExcelPackage Ep = new ExcelPackage();
-            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");
-            Sheet.Cells["A1"].Value = "TERM_ID";
+            //Add WorkSheets Name Report
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");  
+            //Setting column names as Property names
+            Sheet.Cells["A1"].Value = "TERM_ID"; 
             Sheet.Cells["B1"].Value = "TERM_NAME";
             Sheet.Cells["C1"].Value = "CRM_VERSION";
             Sheet.Cells["D1"].Value = "PIN_VERSION";
@@ -422,6 +444,7 @@ namespace WebOperationViewer.Controllers
             Sheet.Cells["H1"].Value = "SIU_VERSION";
             Sheet.Cells["I1"].Value = "UPDATE_DATE";
             int row = 2;
+            //Loop Insert Data To Row
             foreach (var item in teminalInfo)
             {
 
@@ -446,7 +469,8 @@ namespace WebOperationViewer.Controllers
             Response.End();
         }
 
-        public void ExportToExcelLogConfig()//export logConfig
+        //Export LogConfig Page To Excel File
+        public void ExportToExcelLogConfig()
         {
             var LogInfo = (from loginfo in slaDB.logconfig_record_
                            select loginfo).ToList();
@@ -490,9 +514,9 @@ namespace WebOperationViewer.Controllers
             Response.BinaryWrite(Ep.GetAsByteArray());
             Response.End();
         }
-        
 
-        public void ExportToExcelPartition()//export partition
+        //Export PartitionPage To Excel File
+        public void ExportToExcelPartition()
         {
             var deviceInfo = (from devinfo in gsbDB.device_info_
                               select devinfo).ToList();

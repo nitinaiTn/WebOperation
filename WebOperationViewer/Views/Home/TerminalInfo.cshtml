@@ -14,161 +14,174 @@
 }
 
 <body>
-    <div class="shadow-lg p-3 mb-5 bg-white rounded">
-        <div class="container">
-            <div class="row">
-                <div class="col-5">
-                    @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "searchForm" }))
-                    {
-                        <div class="input-group">
-                            <label for="searchterminal"><b>Terminal ID :   </b></label>
-                            <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
-                            <button class="btn btn-default" type="submit" onclick="submitBt()">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </div>      
-                    }
-                </div>
-                <div class="col">
-                    @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
-                    {
-                        <div class="input-group mb-3">
-                            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-                            <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
-                                <option selected>เลือกรายการต่อหน้า</option>
-                                <option value=50>50</option>
-                                <option value=100>100</option>
-                                <option value=1000>1000</option>
-                            </select>
+    <div class="container">
+        <div class="row">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-5">
+                            @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "searchForm" }))
+                            {
+                                <div class="input-group">
+                                    <label for="searchterminal"><b>Terminal ID :   </b></label>
+                                    <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                                    <button class="btn btn-default" type="submit" onclick="submitBt()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            }
                         </div>
-                    }
-                </div>
-                <div class="col">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <a href="@Url.Action("TerminalInfo", "Home")" class="btn btn-secondary">
-                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                    Refresh Table
-                                </a>
-                                <a href="@Url.Action("ExportToExcelTerminal", "Home")" class="btn btn-success">
-                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                                    Download Excel
-                                </a>
+                        <div class="col">
+                            @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
+                            {
+                                <div class="input-group mb-3">
+                                    <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                                    <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                                        <option selected>เลือกรายการต่อหน้า</option>
+                                        <option value=50>50</option>
+                                        <option value=100>100</option>
+                                        <option value=1000>1000</option>
+                                    </select>
+                                </div>
+                            }
+                        </div>
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="@Url.Action("TerminalInfo", "Home")" class="btn btn-secondary">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            Refresh Table
+                                        </a>
+                                        <a href="@Url.Action("ExportToExcelTerminal", "Home")" class="btn btn-success">
+                                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                            Download Excel
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <h6>Next Update Time : @DateTime.Now</h6>
+            <table class="table">
+                <tr style="background-color: #fde3e9;">
+                    <th>
+
+                    </th>
+                    <th>
+                        TERM_ID
+                    </th>
+                    <th>
+                        TERM_NAME
+                    </th>
+                    <th>
+                        CRM_VERSION
+                    </th>
+                    <th>
+                        PIN_VERSION
+                    </th>
+                    <th>
+                        IDC_VERSION
+                    </th>
+                    <th>
+                        PTR_VERSION
+                    </th>
+                    <th>
+                        BCR_VERSION
+                    </th>
+                    <th>
+                        SIU_VERSION
+                    </th>
+                    <th>
+                        UPDATE_DATE
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @(startcount + rows)
+                        </td>
+                        <td>
+                            @item.TERM_ID
+                        </td>
+                        <td>
+                            @item.TERM_NAME
+                        </td>
+                        <td>
+                            @item.CRM_VERSION
+                        </td>
+                        <td>
+                            @item.PIN_VERSION
+                        </td>
+                        <td>
+                            @item.IDC_VERSION
+                        </td>
+                        <td>
+                            @item.PTR_VERSION
+                        </td>
+                        <td>
+                            @item.BCR_VERSION
+                        </td>
+                        <td>
+                            @item.SIU_VERSION
+                        </td>
+                        <td>
+                            @item.UPDATE_DATE
+                        </td>
+                    </tr>
+                    rows += 1;
+                }
+
+            </table>
+            
+        </div>
+        <div class="row">
+
+            <!-- pager -->
+            <div>
+                @if (pager.TotalPage > 0)
+                {
+                    <ul class="pagination justify-content-end">
+                        @if (pager.CurrentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                            </li>
+                        }
+                        @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                        {
+                            <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                                <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
+                            </li>
+                        }
+                        @if (pager.CurrentPage < pager.TotalPage)
+                        {
+                            <li class="page-item">
+                                <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                            </li>
+                            <li class="page-item">
+                                <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
     </div>
     
-    <h6>Next Update Time : @DateTime.Now</h6>
-    <table class="table">
-        <tr style="background-color: #fde3e9;">
-            <th>
-
-            </th>
-            <th>
-                TERM_ID
-            </th>
-            <th>
-                TERM_NAME
-            </th>
-            <th>
-                CRM_VERSION
-            </th>
-            <th>
-                PIN_VERSION
-            </th>
-            <th>
-                IDC_VERSION
-            </th>
-            <th>
-                PTR_VERSION
-            </th>
-            <th>
-                BCR_VERSION
-            </th>
-            <th>
-                SIU_VERSION
-            </th>
-            <th>
-                UPDATE_DATE
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @(startcount + rows)
-                </td>
-                <td>
-                    @item.TERM_ID
-                </td>
-                <td>
-                    @item.TERM_NAME
-                </td>
-                <td>
-                    @item.CRM_VERSION
-                </td>
-                <td>
-                    @item.PIN_VERSION
-                </td>
-                <td>
-                    @item.IDC_VERSION
-                </td>
-                <td>
-                    @item.PTR_VERSION
-                </td>
-                <td>
-                    @item.BCR_VERSION
-                </td>
-                <td>
-                    @item.SIU_VERSION
-                </td>
-                <td>
-                    @item.UPDATE_DATE
-                </td>
-            </tr>
-            rows += 1;
-        }
-
-    </table>
-    <!-- pager -->
-    <div class="container">
-        @if (pager.TotalPage > 0)
-        {
-            <ul class="pagination justify-content-end">
-                @if (pager.CurrentPage > 1)
-                {
-                    <li class="page-item">
-                        <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
-                    </li>
-                }
-                @for (var i = pager.StartPage; i <= pager.EndPage; i++)
-                {
-                    <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                        <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
-                    </li>
-                }
-                @if (pager.CurrentPage < pager.TotalPage)
-                {
-                    <li class="page-item">
-                        <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
-                    </li>
-                    <li class="page-item">
-                        <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
-                    </li>
-                }
-            </ul>
-        }
-    </div>
+    
+    
 
     <script type="text/javascript">
         function SelectedIndexChanged() {
