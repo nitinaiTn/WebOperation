@@ -25,11 +25,12 @@ namespace WebOperationViewer.Controllers
         {
             int pageTemp = 1; // Set Default Page = 1
             int listPageTemp = 1000; // Set Default Pagesize load 1000 row per page
-            //Cheack 
+            //Cheack Select Dropdown list value
             if (Session["currentListPage"] == null)
             {
                 Session["currentListPage"] = 1000;
             }
+            //Check current page not zero
             if (page != null)
             {
                 pageTemp = Convert.ToInt32(page);
@@ -43,11 +44,13 @@ namespace WebOperationViewer.Controllers
             {
                 listPageTemp = Convert.ToInt32(Session["currentListPage"].ToString());
             }
+            //Check SearchBox If Searchbox get data then count item in database contain Searchbox Value
             if (searchterminal != null && page == null && listpage == null)
             {
                 pageTemp = 1;
                 listPageTemp = slaDB.devfwversion_record_.Where(s => s.TERM_ID.Contains(searchterminal)).ToList().Count();
             }
+            //Pass Value Afther Config To SerachTerminal Function
             SearchTerminal(searchterminal, pageTemp, listPageTemp);
             return View();   
         }
@@ -58,14 +61,16 @@ namespace WebOperationViewer.Controllers
             if(String.IsNullOrEmpty(searchterminal))
             {
                 int pagesize = listpage;
-
+                //Count data in Table devfwversion
                 int rowCount = slaDB.devfwversion_record_.Count();
-                if(page < 1)
+                //Check Current pagination Website <= 0
+                if (page < 1)
                 {
                     page = 1;
                 }
-
+                //Set Value in Class DataPager
                 var pager = new DataPager(rowCount, page, pagesize);
+                //Caculate SkipRows Data
                 int skipRows = (page - 1) * pagesize;
                 ViewBag.Pager = pager;
 
@@ -92,7 +97,8 @@ namespace WebOperationViewer.Controllers
                                     }).Skip(skipRows).Take(pagesize).ToList();
                 return View(teminalInfo);
             }
-            else if(searchterminal != null && searchterminal == (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
+            //Check Search Box value contain data in Database
+            else if (searchterminal != null && searchterminal == (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
             {
                 int pagesize = listpage;
                 int rowCount = slaDB.devfwversion_record_.Count();
@@ -129,6 +135,7 @@ namespace WebOperationViewer.Controllers
 
                 return View(teminalInfo);
             }
+            //if Searchbox value not contain return null List of Object
             else if(searchterminal != null && searchterminal != (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
             {
                 List<TerminalViewModel> teminalInfo = new List<TerminalViewModel>();
