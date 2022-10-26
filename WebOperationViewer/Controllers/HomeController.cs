@@ -58,7 +58,7 @@ namespace WebOperationViewer.Controllers
         public ActionResult SearchTerminal(String searchterminal , int page, int listpage)
         {
             //Check Search Box is Null ?
-            if(String.IsNullOrEmpty(searchterminal))
+            if (String.IsNullOrEmpty(searchterminal))
             {
                 int pagesize = listpage;
                 //Count data in Table devfwversion
@@ -98,52 +98,55 @@ namespace WebOperationViewer.Controllers
                 return View(teminalInfo);
             }
             //Check Search Box value contain data in Database
-            else if (searchterminal != null && searchterminal == (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
-            {
-                int pagesize = listpage;
-                int rowCount = slaDB.devfwversion_record_.Count();
-                if (page < 1)
-                {
-                    page = 1;
-                }
-
-                var pager = new DataPager(rowCount, page, pagesize);
-                int skipRows = (page - 1) * pagesize;
-                ViewBag.Pager = pager;
-
-                var deviceInfo = (from devinfo in gsbDB.device_info_
-                                  select devinfo).ToList();
-
-                var deviceFirmWare = (from devfw in slaDB.devfwversion_record_
-                                      select devfw).ToList();
-
-                var teminalInfo = (from devfw in deviceFirmWare
-                                   join devinfo in deviceInfo
-                                    on devfw.TERM_ID equals devinfo.TERM_ID
-                                   select new FirmwareInfoViewModel
-                                   {
-                                       TERM_ID = devfw.TERM_ID,
-                                       TERM_NAME = devinfo.TERM_NAME,
-                                       CRM_VERSION = devfw.CRM_VERSION,
-                                       PIN_VERSION = devfw.PIN_VERSION,
-                                       IDC_VERSION = devfw.IDC_VERSION,
-                                       PTR_VERSION = devfw.PTR_VERSION,
-                                       BCR_VERSION = devfw.BCR_VERSION,
-                                       SIU_VERSION = devfw.SIU_VERSION,
-                                       UPDATE_DATE = devfw.UPDATE_DATE
-                                   }).Where(x => x.TERM_ID.Contains(searchterminal)).Skip(skipRows).Take(pagesize).ToList();
-
-                return View(teminalInfo);
-            }
-            //if Searchbox value not contain return null List of Object
-            else if(searchterminal != null && searchterminal != (slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal))).ToString())
-            {
-                List<TerminalViewModel> teminalInfo = new List<TerminalViewModel>();
-                return View(teminalInfo);
-            }
             else
             {
-                return View();
+                if (searchterminal != null/*.Contains(slaDB.devfwversion_record_.Where(x => x.TERM_ID.Contains(searchterminal)).ToString())*/)
+                {
+                    int pagesize = listpage;
+                    //int rowCount = slaDB.devfwversion_record_.Count();
+                    if (page < 1)
+                    {
+                        page = 1;
+                    }
+                    
+                    
+                    int skipRows = (page - 1) * pagesize;
+                    
+
+                    var deviceInfo = (from devinfo in gsbDB.device_info_
+                                      select devinfo).ToList();
+
+                    var deviceFirmWare = (from devfw in slaDB.devfwversion_record_
+                                          select devfw).ToList();
+
+                    var teminalInfo = (from devfw in deviceFirmWare
+                                       join devinfo in deviceInfo
+                                        on devfw.TERM_ID equals devinfo.TERM_ID
+                                       select new FirmwareInfoViewModel
+                                       {
+                                           TERM_ID = devfw.TERM_ID,
+                                           TERM_NAME = devinfo.TERM_NAME,
+                                           CRM_VERSION = devfw.CRM_VERSION,
+                                           PIN_VERSION = devfw.PIN_VERSION,
+                                           IDC_VERSION = devfw.IDC_VERSION,
+                                           PTR_VERSION = devfw.PTR_VERSION,
+                                           BCR_VERSION = devfw.BCR_VERSION,
+                                           SIU_VERSION = devfw.SIU_VERSION,
+                                           UPDATE_DATE = devfw.UPDATE_DATE
+                                       }).Where(x => x.TERM_ID.Contains(searchterminal)).Skip(skipRows).Take(pagesize).ToList();
+                    int rowCount = teminalInfo.Count;   
+                    var pager = new DataPager(rowCount, page, pagesize);
+                    ViewBag.Pager = pager;
+                    ViewBag.SearchTerminal = searchterminal;
+                    return View(teminalInfo);
+                }
+                //if Searchbox value not contain return null List of Object
+                else
+                {
+                    ViewBag.FailQurry = "Not";
+                    List<TerminalViewModel> teminalInfo = new List<TerminalViewModel>();
+                    return View(teminalInfo);
+                }
             }
         }
 

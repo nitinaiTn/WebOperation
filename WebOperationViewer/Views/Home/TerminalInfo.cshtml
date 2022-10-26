@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<WebOperationViewer.ViewModels.FirmwareInfoViewModel>
+
 @using WebOperationViewer.Models;
 
 @{
+
     ViewBag.Title = "TerminalInfo";
     int rows = 1;
     int startcount = 0;
@@ -67,117 +69,124 @@
         </div>
         <div class="row">
             <h6>Next Update Time : @DateTime.Now</h6>
-            <table class="table">
-                <tr style="background-color: #fde3e9;">
-                    <th>
-
-                    </th>
-                    <th>
-                        TERM_ID
-                    </th>
-                    <th>
-                        TERM_NAME
-                    </th>
-                    <th>
-                        CRM_VERSION
-                    </th>
-                    <th>
-                        PIN_VERSION
-                    </th>
-                    <th>
-                        IDC_VERSION
-                    </th>
-                    <th>
-                        PTR_VERSION
-                    </th>
-                    <th>
-                        BCR_VERSION
-                    </th>
-                    <th>
-                        SIU_VERSION
-                    </th>
-                    <th>
-                        UPDATE_DATE
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
+            @{ if (ViewBag.FailQurry == null)
                 {
-                    <tr>
-                        <td>
-                            @(startcount + rows)
-                        </td>
-                        <td>
-                            @item.TERM_ID
-                        </td>
-                        <td>
-                            @item.TERM_NAME
-                        </td>
-                        <td>
-                            @item.CRM_VERSION
-                        </td>
-                        <td>
-                            @item.PIN_VERSION
-                        </td>
-                        <td>
-                            @item.IDC_VERSION
-                        </td>
-                        <td>
-                            @item.PTR_VERSION
-                        </td>
-                        <td>
-                            @item.BCR_VERSION
-                        </td>
-                        <td>
-                            @item.SIU_VERSION
-                        </td>
-                        <td>
-                            @item.UPDATE_DATE
-                        </td>
-                    </tr>
-                    rows += 1;
+                    <table class="table">
+                        <tr style="background-color: #fde3e9;">
+                            <th>
+
+                            </th>
+                            <th>
+                                TERM_ID
+                            </th>
+                            <th>
+                                TERM_NAME
+                            </th>
+                            <th>
+                                CRM_VERSION
+                            </th>
+                            <th>
+                                PIN_VERSION
+                            </th>
+                            <th>
+                                IDC_VERSION
+                            </th>
+                            <th>
+                                PTR_VERSION
+                            </th>
+                            <th>
+                                BCR_VERSION
+                            </th>
+                            <th>
+                                SIU_VERSION
+                            </th>
+                            <th>
+                                UPDATE_DATE
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @(startcount + rows)
+                                </td>
+                                <td>
+                                    @item.TERM_ID
+                                </td>
+                                <td>
+                                    @item.TERM_NAME
+                                </td>
+                                <td>
+                                    @item.CRM_VERSION
+                                </td>
+                                <td>
+                                    @item.PIN_VERSION
+                                </td>
+                                <td>
+                                    @item.IDC_VERSION
+                                </td>
+                                <td>
+                                    @item.PTR_VERSION
+                                </td>
+                                <td>
+                                    @item.BCR_VERSION
+                                </td>
+                                <td>
+                                    @item.SIU_VERSION
+                                </td>
+                                <td>
+                                    @item.UPDATE_DATE
+                                </td>
+                            </tr>
+                            rows += 1;
+                        }
+
+                    </table>
+                    <div class="row">
+
+                        <!-- pager -->
+                        <div>
+                            @if (pager.TotalPage > 0)
+                            {
+                                <ul class="pagination justify-content-end">
+                                    @if (pager.CurrentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
+                                        </li>
+                                    }
+                                    @for (var i = pager.StartPage; i <= pager.EndPage; i++)
+                                    {
+                                        <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
+                                            <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
+                                        </li>
+                                    }
+                                    @if (pager.CurrentPage < pager.TotalPage)
+                                    {
+                                        <li class="page-item">
+                                            <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
                 }
-
-            </table>
-            
-        </div>
-        <div class="row">
-
-            <!-- pager -->
-            <div>
-                @if (pager.TotalPage > 0)
+                else
                 {
-                    <ul class="pagination justify-content-end">
-                        @if (pager.CurrentPage > 1)
-                        {
-                            <li class="page-item">
-                                <a href="~/Home/TerminalInfo?page=@(1)">หน้าแรก</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage - 1)">ย้อนกลับ</a>
-                            </li>
-                        }
-                        @for (var i = pager.StartPage; i <= pager.EndPage; i++)
-                        {
-                            <li class="page-item @(i == pager.CurrentPage ? "active" : "")">
-                                <a href="~/Home/TerminalInfo?page=@(i)">@i</a>
-                            </li>
-                        }
-                        @if (pager.CurrentPage < pager.TotalPage)
-                        {
-                            <li class="page-item">
-                                <a href="~/Home/TerminalInfo?page=@(pager.CurrentPage + 1)">ถัดไป</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="~/Home/TerminalInfo?page=@(pager.TotalPage)">หน้าสุดท้าย</a>
-                            </li>
-                        }
-                    </ul>
+                    <h1>Not Data in Database Try agin</h1>
                 }
-            </div>
+            }
         </div>
-
+ 
     </div>
     
     
@@ -189,7 +198,10 @@
         }
         function submitBt() {
             document.getElementById('searchForm').submit();
+            var x = document.getElementById('searchterminal');
+            x.value = ViewBag.SearchTerminal;
         }
+
     </script>
 
 
