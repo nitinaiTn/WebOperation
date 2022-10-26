@@ -140,7 +140,21 @@
                     @Html.DisplayFor(modelItem => item.FREE_SPACE)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.STATUS)
+                    @{
+                        if (item.STATUS == "Normal")
+                        {
+                            <span class"control-label" style="background-color: green; color: black">@Html.DisplayFor(modelItem => item.STATUS)</span>
+                        }
+                        if (item.STATUS == "Warning")
+                        {
+                            <span class"control-label" style="background-color: yellow; color: black ">@Html.DisplayFor(modelItem => item.STATUS)</span>
+                        }
+                        if (item.STATUS == "Drive F Missing")
+                        {
+                            <span class"control-label" style="background-color:red;color: black">@Html.DisplayFor(modelItem => item.STATUS)</span>
+                        }
+                    }
+                    @*@Html.DisplayFor(modelItem => item.STATUS)*@
                 </td>
             </tr>
             rows += 1;

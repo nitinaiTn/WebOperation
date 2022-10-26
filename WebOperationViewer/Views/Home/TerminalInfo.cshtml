@@ -25,8 +25,8 @@
                             @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "searchForm" }))
                             {
                                 <div class="input-group">
-                                    <label for="searchterminal"><b>Terminal ID :   </b></label>
-                                    <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                                    <label for="searchterminal" class="mt-1"><b>Terminal ID :   </b></label>
+                                    <input type="text" class="form-control ml-3" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
                                     <button class="btn btn-default" type="submit" onclick="submitBt()">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
@@ -37,8 +37,8 @@
                             @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
                             {
                                 <div class="input-group mb-3">
-                                    <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-                                    <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                                    <label for="listpage" onunload="initialValue()" class="mt-1">รายการต่อหน้า: </label>
+                                    <select class="custom-select ml-3" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
                                         <option selected>เลือกรายการต่อหน้า</option>
                                         <option value=50>50</option>
                                         <option value=100>100</option>
@@ -50,8 +50,8 @@
                         <div class="col">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col">
-                                        <a href="@Url.Action("TerminalInfo", "Home")" class="btn btn-secondary">
+                                    <div class="row">
+                                        <a href="@Url.Action("TerminalInfo", "Home")" class="btn btn-secondary mr-3">
                                             <i class="fa fa-refresh" aria-hidden="true"></i>
                                             Refresh Table
                                         </a>

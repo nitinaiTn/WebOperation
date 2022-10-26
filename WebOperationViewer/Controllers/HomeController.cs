@@ -134,7 +134,12 @@ namespace WebOperationViewer.Controllers
                                            SIU_VERSION = devfw.SIU_VERSION,
                                            UPDATE_DATE = devfw.UPDATE_DATE
                                        }).Where(x => x.TERM_ID.Contains(searchterminal)).Skip(skipRows).Take(pagesize).ToList();
-                    int rowCount = teminalInfo.Count;   
+                    int rowCount = teminalInfo.Count;
+                    if (teminalInfo.Count == 0)
+                    {
+                        ViewBag.FailQurry = "Not";
+                        pagesize = 1;
+                    }   
                     var pager = new DataPager(rowCount, page, pagesize);
                     ViewBag.Pager = pager;
                     ViewBag.SearchTerminal = searchterminal;
@@ -143,9 +148,7 @@ namespace WebOperationViewer.Controllers
                 //if Searchbox value not contain return null List of Object
                 else
                 {
-                    ViewBag.FailQurry = "Not";
-                    List<TerminalViewModel> teminalInfo = new List<TerminalViewModel>();
-                    return View(teminalInfo);
+                    return View();
                 }
             }
         }
