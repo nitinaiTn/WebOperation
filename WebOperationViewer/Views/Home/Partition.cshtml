@@ -48,8 +48,8 @@
                     @using (Html.BeginForm("Partition", "Home", FormMethod.Post, new { id = "searchForm" }))
                     {
                         <div class="input-group">
-                            <label for="searchterminal"><b>Terminal ID :   </b></label>
-                            <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                            <label class="mt-1 mr-1" for="searchterminal"><b>Terminal ID :   </b></label>
+                            <input type="text" class="form-control ml-1" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
                             <button class="btn btn-default" type="submit" onclick="submitBt()">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
@@ -60,13 +60,14 @@
                     @using (Html.BeginForm("TerminalInfo", "Home", FormMethod.Post, new { id = "listForm" }))
                     {
                         <div class="input-group mb-3">
-                            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-                            <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
-                                <option selected>เลือกรายการต่อหน้า</option>
-                                <option value=50>50</option>
-                                <option value=100>100</option>
-                                <option value=1000>1000</option>
-                            </select>
+                                    <label class="mt-1 mr-1" for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                                
+                                    <select class="custom-select ml-1" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                                        <option selected>เลือกรายการต่อหน้า</option>
+                                        <option value=50>50</option>
+                                        <option value=100>100</option>
+                                        <option value=1000>1000</option>
+                                    </select>                                          
                         </div>
                     }
                 </div>

@@ -59,8 +59,8 @@
                     @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "searchForm" }))
                     {
                         <div class="input-group">
-                            <label for="searchterminal"><b>Terminal ID :   </b></label>
-                            <input type="text" class="form-control" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
+                            <label class="mt-1" mr-1 for="searchterminal"><b>Terminal ID :   </b></label>
+                            <input type="text" class="form-control ml-1" id="searchterminal" name="searchterminal" placeholder="" oninput="writeFunc()" />
                             <button class="btn btn-default" type="submit" onclick="submitBt()">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
@@ -79,8 +79,8 @@
                     @using (Html.BeginForm("LogConfig", "Home", FormMethod.Post, new { id = "listForm" }))
                     {
                         <div class="input-group mb-3">
-                            <label for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
-                            <select class="custom-select" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
+                            <label class="mt-1 mr-1" for="listpage" onunload="initialValue()">รายการต่อหน้า: </label>
+                            <select class="custom-select ml-1" name="listpage" id="listpage" onchange="SelectedIndexChanged()">
                                 <option selected>เลือกรายการต่อหน้า</option>
                                 <option value=50>50</option>
                                 <option value=100>100</option>
@@ -89,19 +89,17 @@
                         </div>
                     }
                 </div>
-                <div class="col">
+                <div class="col-md-3">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <a href="@Url.Action("LogConfig","Home")" class="btn btn-secondary">
-                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                    Refresh Table
-                                </a>
-                                <a href="@Url.Action("ExportToExcelLogConfig","Home")" class="btn btn-success">
-                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-                                    Download Excel
-                                </a>
-                            </div>
+                            <a href="@Url.Action("LogConfig","Home")" class="btn btn-secondary ml-4">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                                Refresh Table
+                            </a>
+                            <a href="@Url.Action("ExportToExcelLogConfig","Home")" class="btn btn-success ml-1">
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                Download Excel
+                            </a>
                         </div>
                     </div>
                 </div>
